@@ -38,7 +38,8 @@ impl<'a> SetPassword<'a> {
     /// Execute to configure the account
     pub(super) fn execute(&self, context: &'a impl Context<'a>) -> Result<(), Error> {
         let mut cmd = Command::new("chroot");
-        cmd.arg(context.root().clone());
+        cmd.current_dir(context.root());
+        cmd.arg(".");
         cmd.arg("chpasswd");
 
         let password_text = format!("{}:{}\n", &self.account.username, self.password);
@@ -59,7 +60,8 @@ impl<'a> CreateAccount<'a> {
 
     pub(super) fn execute(&self, context: &'a impl Context<'a>) -> Result<(), Error> {
         let mut cmd = Command::new("chroot");
-        cmd.arg(context.root().clone());
+        cmd.current_dir(context.root());
+        cmd.arg(".");
         cmd.arg("useradd");
         cmd.arg(self.account.username.clone());
         cmd.args(["-m", "-U", "-G", "audio,adm,wheel,render,kvm,input,users"]);
@@ -145,7 +147,8 @@ impl<'a> SetMachineID {
         }
 
         let mut cmd = Command::new("chroot");
-        cmd.arg(context.root().clone());
+        cmd.current_dir(context.root());
+        cmd.arg(".");
         cmd.arg("systemd-machine-id-setup");
         context.run_command_captured(&mut cmd, None)?;
 
@@ -226,6 +229,14 @@ impl Default for EmitFstab {
 impl TryFrom<&SystemPartition> for FstabEntry {
     type Error = self::Error;
     fn try_from(value: &SystemPartition) -> Result<Self, Error> {
+        let (options, pass) = match value.partition.sb.as_ref() {
+            Some(sb) => match sb {
+                system::disk::SuperblockKind::Btrfs => todo!(),
+                system::disk::SuperblockKind::Ext4 => ("rw,errors=remount-ro".to_string(), 1),
+                _ => ("defaults,rw".to_string(), 0),
+            },
+            None => ("defaults,rw".to_string(), 0),
+        };
         // Honestly, this is a bit ext4 centric, no ssd care given
         let s = Self::Device {
             // NOTE: This is always PartUUID for us, we only do GPT.
@@ -237,9 +248,9 @@ impl TryFrom<&SystemPartition> for FstabEntry {
                 .as_ref()
                 .map(|sb| sb.to_string())
                 .ok_or(Error::UnknownFilesystem)?,
-            opts: "rw,errors=remount-ro".to_string(),
+            opts: options,
             dump: 0,
-            pass: 1,
+            pass,
         };
 
         Ok(s)
