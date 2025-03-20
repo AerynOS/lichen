@@ -9,7 +9,7 @@ use std::{fmt::Display, process::Command};
 use fs_err as fs;
 use system::locale::Locale;
 
-use crate::{Account, SystemPartition};
+use crate::Account;
 
 use super::{Context, Error};
 
@@ -223,37 +223,6 @@ impl Default for EmitFstab {
                 },
             ],
         }
-    }
-}
-
-impl TryFrom<&SystemPartition> for FstabEntry {
-    type Error = self::Error;
-    fn try_from(value: &SystemPartition) -> Result<Self, Error> {
-        let (options, pass) = match value.partition.sb.as_ref() {
-            Some(sb) => match sb {
-                system::disk::SuperblockKind::Btrfs => todo!(),
-                system::disk::SuperblockKind::Ext4 => ("rw,errors=remount-ro".to_string(), 1),
-                _ => ("defaults,rw".to_string(), 0),
-            },
-            None => ("defaults,rw".to_string(), 0),
-        };
-        // Honestly, this is a bit ext4 centric, no ssd care given
-        let s = Self::Device {
-            // NOTE: This is always PartUUID for us, we only do GPT.
-            fs: format!("PARTUUID={}", &value.partition.uuid),
-            mountpoint: value.mountpoint.clone().ok_or(Error::NoMountpoint)?,
-            kind: value
-                .partition
-                .sb
-                .as_ref()
-                .map(|sb| sb.to_string())
-                .ok_or(Error::UnknownFilesystem)?,
-            opts: options,
-            dump: 0,
-            pass,
-        };
-
-        Ok(s)
     }
 }
 

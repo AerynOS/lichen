@@ -247,13 +247,25 @@ impl Installer {
         // Ensure we get a machine-id..
         s.push(Step::set_machine_id());
 
+        let (options, pass) = match model.rootfs_type.as_str() {
+            "ext4" => ("rw,errors=remount-ro".to_string(), 1),
+            _ => ("defaults,rw".to_string(), 0),
+        };
+
         // Write the fstab
         let fstab = EmitFstab::default().with_entries([
             FstabEntry::Comment(format!(
                 "{} at time of installation",
                 root_partition.partition.path.display()
             )),
-            FstabEntry::try_from(root_partition)?,
+            FstabEntry::Device {
+                fs: root_partition.partition.uuid.clone(),
+                mountpoint: "/".into(),
+                kind: model.rootfs_type.clone(),
+                opts: options,
+                dump: 0,
+                pass,
+            },
         ]);
         s.push(Step::emit_fstab(fstab));
 
