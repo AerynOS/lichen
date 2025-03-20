@@ -30,9 +30,9 @@
     "font-noto",
     "font-noto-emoji",
     "gnome-backgrounds",
+    "gnome-desktop-defaults",
     "liberation-fonts-ttf",
     "loupe",
-    "serpent-gnome-defaults",
     "sysbinary(gdm)",
     "sysbinary(plymouthd)"
   ]

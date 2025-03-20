@@ -214,7 +214,7 @@ fn main() -> color_eyre::Result<()> {
 
     sp.clear();
 
-    cliclack::intro(style("Install Serpent OS").bold())?;
+    cliclack::intro(style("Install AerynOS").bold())?;
     cliclack::log::warning(format!(
         "{} - this is an alpha quality installer.",
         style("Be warned!").bold()
@@ -316,7 +316,7 @@ fn main() -> color_eyre::Result<()> {
     multi.clear()?;
     println!(
         "🎉 🥳 Succesfully installed {}! Reboot now to start using it!",
-        style("Serpent OS").bold()
+        style("AerynOS").bold()
     );
 
     Ok(())
