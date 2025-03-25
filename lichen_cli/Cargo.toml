@@ -9,10 +9,10 @@ chrono-tz.workspace = true
 crossterm.workspace = true
 cliclack = { git = "https://github.com/ikeycode/cliclack.git", rev = "35a1882c601b90bf1398c3cb867cc6b20bbe9ce9" }
 dialoguer = { version = "0.11.0", features = ["completion", "fuzzy-matcher", "fuzzy-select"] }
-indicatif = "0.17.8"
-indoc = "2.0.5"
+indicatif = "0.17.11"
+indoc = "2.0.6"
 installer = { path = "../crates/installer" }
-console = "0.15.8"
+console = "0.15.11"
 nix.workspace = true
 env_logger.workspace = true
 
