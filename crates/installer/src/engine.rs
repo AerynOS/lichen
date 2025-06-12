@@ -216,7 +216,7 @@ impl Installer {
 
         // HAX:
         s.push(Step::add_repo(AddRepo {
-            uri: "https://dev.serpentos.com/volatile/x86_64/stone.index".into(),
+            uri: "https://packages.aerynos.com/volatile/x86_64/stone.index".into(),
             name: "unstable".into(),
             priority: 0,
         }));

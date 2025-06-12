@@ -1,6 +1,6 @@
 # lichen
 
-A heavily in-development, experimental, and early days installer for Serpent OS to meet a deadline.
+A heavily in-development, experimental, and early days installer for AerynOS to meet a deadline.
 
 ## Build & Test
 
