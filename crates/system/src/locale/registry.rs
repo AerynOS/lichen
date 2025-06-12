@@ -53,7 +53,7 @@ impl Registry {
     /// Load all the territories
     fn load_territories() -> Result<Vec<Territory>, Error> {
         // Load the territories in
-        let territories = format!("{}/iso_3166-1.json", ISO_CODES_BASE);
+        let territories = format!("{ISO_CODES_BASE}/iso_3166-1.json");
         let contents = fs::read_to_string(territories)?;
         let parser = serde_json::from_str::<iso_3166::Document<'_>>(&contents)?;
 
@@ -62,7 +62,7 @@ impl Registry {
 
     /// Load the 2 DB
     fn load_languages_2() -> Result<Vec<Language>, Error> {
-        let languages = format!("{}/iso_639-2.json", ISO_CODES_BASE);
+        let languages = format!("{ISO_CODES_BASE}/iso_639-2.json");
         let contents = fs::read_to_string(languages)?;
         let parser = serde_json::from_str::<iso_639_2::Document<'_>>(&contents)?;
 
@@ -71,7 +71,7 @@ impl Registry {
 
     /// Load the 3 DB
     fn load_languages_3() -> Result<Vec<Language>, Error> {
-        let languages = format!("{}/iso_639-3.json", ISO_CODES_BASE);
+        let languages = format!("{ISO_CODES_BASE}/iso_639-3.json");
         let contents = fs::read_to_string(languages)?;
         let parser = serde_json::from_str::<iso_639_3::Document<'_>>(&contents)?;
 
@@ -148,7 +148,7 @@ impl Registry {
             new_id.push(format!("@{m}"));
         }
         if let Some(codeset) = codeset.as_ref() {
-            new_id.push(format!(".{}", codeset));
+            new_id.push(format!(".{codeset}"));
         }
 
         Some(Locale {

@@ -51,7 +51,7 @@ impl Partition {
     /// Construct new Partition from the given GPT Partition and block size
     pub fn from(value: &gpt::partition::Partition, block_size: &LogicalBlockSize) -> Result<Self, super::Error> {
         let uuid = value.part_guid.hyphenated().to_string();
-        let path = fs::canonicalize(format!("/dev/disk/by-partuuid/{}", uuid))?;
+        let path = fs::canonicalize(format!("/dev/disk/by-partuuid/{uuid}"))?;
         let kind = match value.part_type_guid {
             partition_types::EFI => Kind::ESP,
             partition_types::FREEDESK_BOOT => Kind::XBOOTLDR,

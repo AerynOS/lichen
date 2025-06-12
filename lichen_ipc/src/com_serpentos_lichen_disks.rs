@@ -18,7 +18,7 @@ impl ::std::fmt::Display for ErrorKind {
         match self {
             ErrorKind::Varlink_Error => write!(f, "Varlink Error"),
             ErrorKind::VarlinkReply_Error => write!(f, "Varlink error reply"),
-            ErrorKind::DiskError(v) => write!(f, "com.serpentos.lichen.disks.DiskError: {:#?}", v),
+            ErrorKind::DiskError(v) => write!(f, "com.serpentos.lichen.disks.DiskError: {v:#?}"),
         }
     }
 }
@@ -263,7 +263,7 @@ impl varlink::Interface for VarlinkInterfaceProxy {
                     let args: GetPartitions_Args = match serde_json::from_value(args) {
                         Ok(v) => v,
                         Err(e) => {
-                            let es = format!("{}", e);
+                            let es = format!("{e}");
                             let _ = call.reply_invalid_parameter(es.clone());
                             return Err(varlink::context!(varlink::ErrorKind::SerdeJsonDe(es)));
                         }

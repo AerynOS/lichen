@@ -47,10 +47,10 @@ pub struct Disk {
 
 impl Display for Disk {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let vendor = self.vendor.as_ref().map(|v| format!("{} ", v)).unwrap_or_default();
+        let vendor = self.vendor.as_ref().map(|v| format!("{v} ")).unwrap_or_default();
 
         let description = if let Some(model) = self.model.as_ref() {
-            format!("{}{}", vendor, model)
+            format!("{vendor}{model}")
         } else {
             vendor.to_string()
         };
