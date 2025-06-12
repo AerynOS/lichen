@@ -82,7 +82,7 @@ impl Installer {
 
         let mut boot_parts = vec![];
         let mut system_parts = vec![];
-        for disk in disks.iter().filter(|d| !parents.iter().any(|r| *r == d.path)) {
+        for disk in disks.iter().filter(|d| !parents.contains(&d.path)) {
             let parts = match disk.partitions() {
                 Ok(parts) => parts,
                 Err(e) => {
@@ -94,7 +94,7 @@ impl Installer {
             // Exclude partitions related to `/` partition
             let parts = parts
                 .into_iter()
-                .filter(|p| !root_nodes.iter().any(|r| *r == p.path))
+                .filter(|p| !root_nodes.contains(&p.path))
                 .collect::<Vec<_>>();
             if let Some(esp) = parts
                 .iter()

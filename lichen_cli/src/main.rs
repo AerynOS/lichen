@@ -381,7 +381,7 @@ fn main() -> color_eyre::Result<()> {
         style("Serpent OS").bold()
     );
     multi.clear()?;
-    println!("\n{}\n{}\n", home_note, installer_success);
+    println!("\n{home_note}\n{installer_success}\n");
 
     Ok(())
 }
