@@ -67,6 +67,7 @@ impl<'a> Context<'a> for CliContext {
 /// Ask the user what locale to use
 fn ask_locale<'a>(locales: &'a [Locale<'a>]) -> color_eyre::Result<&'a Locale<'a>> {
     let locales_disp = locales.iter().enumerate().map(|(i, l)| (i, l, "")).collect::<Vec<_>>();
+    ensure!(!locales.is_empty(), "Internal error: No locales");
     let index = cliclack::select("Pick a locale")
         .items(locales_disp.as_slice())
         .initial_value(0)
@@ -83,6 +84,7 @@ fn ask_timezone() -> color_eyre::Result<String> {
         .enumerate()
         .map(|(i, v)| (i, v, ""))
         .collect::<Vec<_>>();
+    ensure!(!variants.is_empty(), "Internal error: No timezones");
     let index = cliclack::select("Pick a timezone")
         .items(variants.as_slice())
         .initial_value(0)
@@ -187,6 +189,7 @@ fn ask_desktop<'a>(desktops: &'a [&Group]) -> color_eyre::Result<&'a Group> {
         .enumerate()
         .map(|(i, d)| (i, &d.summary, &d.description))
         .collect::<Vec<_>>();
+    ensure!(!displayable.is_empty(), "Internal error: No displayable desktops");
     let index = cliclack::select("Pick a desktop environment to use")
         .items(displayable.as_slice())
         .initial_value(1)
@@ -256,6 +259,9 @@ fn main() -> color_eyre::Result<()> {
     let boots = inst.boot_partitions();
     let parts = inst.system_partitions();
     let locales = inst.locales_for_ids(systemd::localectl_list_locales()?)?;
+
+    ensure!(!boots.is_empty(), "Failed to find an EFI system partition");
+    ensure!(!parts.is_empty(), "Failed to find a suitable root partition");
 
     sp.clear();
 
