@@ -1,7 +1,7 @@
 {
   "name": "base",
   "summary": "Base system",
-  "description": "The base system for all Serpent OS installations.",
+  "description": "The base system for all AerynOS installations.",
   "required": [
     "bash-completion",
     "binary(bash)",
@@ -33,10 +33,17 @@
     "uutils-coreutils",
     "dbus",
     "dbus-broker",
+    "dmidecode",
     "iproute2",
+    "hyperv-daemons",
+    "pciutils",
+    "qemu-guest-agent",
+    "usbutils",
     "shadow",
+    "spice-vdagent",
     "systemd",
     "tzdata",
-    "util-linux"
+    "util-linux",
+    "zram-generator-defaults"
   ]
 }

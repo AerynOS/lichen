@@ -7,12 +7,12 @@
   ],
   "required": [
     "cosmic-applets",
-    "cosmic-desktop",
-    "cosmic-greeter",
     "cosmic-bg",
     "cosmic-comp",
+    "cosmic-desktop",
     "cosmic-edit",
     "cosmic-files",
+    "cosmic-greeter",
     "cosmic-icons",
     "cosmic-launcher",
     "cosmic-notifications",
@@ -28,16 +28,16 @@
     "cosmic-term",
     "cosmic-wallpapers",
     "cosmic-workspaces",
-    "serpent-artwork",
-    "xdg-desktop-portal-cosmic",
-    "xdg-desktop-portal-gtk",
+    "firefox",
     "flatpak",
     "font-firacode",
     "font-hack",
     "font-noto",
     "font-noto-emoji",
-    "firefox",
     "liberation-fonts-ttf",
-    "sysbinary(plymouthd)"
+    "serpent-artwork",
+    "sysbinary(plymouthd)",
+    "xdg-desktop-portal-cosmic",
+    "xdg-desktop-portal-gtk"
   ]
 }
