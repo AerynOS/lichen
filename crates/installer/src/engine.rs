@@ -109,7 +109,7 @@ impl Installer {
                     esp,
                     xbootldr,
                     parent_desc: disk.to_string(),
-                })
+                });
             }
             let others = parts
                 .iter()
