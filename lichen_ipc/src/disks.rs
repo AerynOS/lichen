@@ -106,9 +106,11 @@ impl disks_ipc::VarlinkInterface for Service {
                                 match sb {
                                     system::disk::SuperblockKind::Btrfs => disks_ipc::Partition_superblock_kind::btrfs,
                                     system::disk::SuperblockKind::Ext4 => disks_ipc::Partition_superblock_kind::ext4,
-                                    system::disk::SuperblockKind::LUKS2 => disks_ipc::Partition_superblock_kind::luks2,
+                                    system::disk::SuperblockKind::Luks2 => disks_ipc::Partition_superblock_kind::luks2,
                                     system::disk::SuperblockKind::F2FS => disks_ipc::Partition_superblock_kind::f2fs,
-                                    system::disk::SuperblockKind::XFS => disks_ipc::Partition_superblock_kind::xfs,
+                                    system::disk::SuperblockKind::Xfs => disks_ipc::Partition_superblock_kind::xfs,
+                                    // FIXME: introduce FAT kind?
+                                    system::disk::SuperblockKind::Fat => disks_ipc::Partition_superblock_kind::unknown,
                                 }
                             } else {
                                 disks_ipc::Partition_superblock_kind::unknown

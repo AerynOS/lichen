@@ -11,6 +11,7 @@ use std::path::PathBuf;
 use fs_err as fs;
 use gpt::disk::LogicalBlockSize;
 use gpt::partition_types;
+use superblock::Superblock;
 
 /// Partition on a GPT disk
 #[derive(Debug, Clone, Default)]
@@ -43,7 +44,7 @@ fn scan_superblock(path: &PathBuf) -> Result<superblock::Kind, super::Error> {
     let mut buffer: Vec<u8> = Vec::with_capacity(2 * 1024 * 1024);
     fi.take(2 * 1024 * 1024).read_to_end(&mut buffer)?;
     let mut cursor = Cursor::new(&buffer);
-    let sb = superblock::for_reader(&mut cursor)?;
+    let sb = Superblock::from_reader(&mut cursor)?;
     Ok(sb.kind())
 }
 
