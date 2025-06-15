@@ -2,7 +2,8 @@
 members = [
     "crates/*",
     "lichen_cli",
-    "lichen_ipc"
+# This is unused
+#    "lichen_ipc"
 ]
 default-members = [
     "lichen_cli"

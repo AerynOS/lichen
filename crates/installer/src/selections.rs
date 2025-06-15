@@ -133,7 +133,7 @@ mod tests {
         let pkgs = manager
             .selections_with(["develop"])
             .expect("Needed empty set of base selections");
-        assert_eq!(pkgs_partial.len(), 35);
-        assert_eq!(pkgs.len(), 38);
+        assert_eq!(pkgs_partial.len(), 42);
+        assert_eq!(pkgs.len(), 46);
     }
 }

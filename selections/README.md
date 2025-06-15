@@ -6,9 +6,13 @@ This directory contains some selections for the target installation experience.
 
 The mandatory bottom layer for all systems
 
+### cosmic
+
+A full COSMIC desktop
+
 ### develop
 
-A set of additional packages to make Serpent OS development easier.
+A set of additional packages to make AerynOS development easier.
 
 ### gnome
 

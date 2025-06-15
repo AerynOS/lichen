@@ -104,9 +104,9 @@ fn ask_esp(parts: &[BootPartition]) -> color_eyre::Result<&BootPartition> {
         .collect::<Vec<_>>();
     ensure!(
         !parts_disp.is_empty(),
-        "No disk with an available EFI system partition found. Exiting."
+        "No disk with an available FAT32-formatted EFI system partition found. Exiting."
     );
-    let index = cliclack::select("Pick EFI system partition (ESP) + Linux extended boot partition (XBOOTLDR)")
+    let index = cliclack::select("Pick FAT32-formatted ESP + XBOOTLDR partitions")
         .items(parts_disp.as_slice())
         .initial_value(0)
         .interact()?;
@@ -122,9 +122,9 @@ fn ask_rootfs(parts: &[SystemPartition]) -> color_eyre::Result<&SystemPartition>
         .collect::<Vec<_>>();
     ensure!(
         !parts_disp.is_empty(),
-        "No disk with an available Linux partition for the system install root found. Exiting."
+        "No disk with a pre-created Linux partition for the system install root found. Exiting."
     );
-    let index = cliclack::select("Pick a suitably sized partition for the system install root (>20GiB)")
+    let index = cliclack::select("Pick the partition to be used for the system install root (>20GiB)")
         .items(parts_disp.as_slice())
         .initial_value(0)
         .interact()?;
@@ -207,34 +207,40 @@ fn main() -> color_eyre::Result<()> {
     ensure!(euid == 0, "lichen must be run as root. Re-run with sudo.");
 
     let partition_detection_warning = indoc! {"
-        The installer currently does not attempt to detect if there is a file system
-        on detected ESP (and XBOOTLDR) partitions.
+        This iteration of the installer REQUIRES you to have pre-created GPT partitions.
 
-        Please ensure that the EFI system partition (ESP) and the Linux extended boot
-        (XBOOTLDR) partition are both formatted as FAT32.
+        It may be a good idea to check the following in gparted (or fdisk) now:
 
-        It may be a good idea to check this in gparted (or fdisk) now:
-        - The EFI system partition (>=256MiB) should have the flag 'esp' in gparted
-          - This corresponds to type 1 in fdisk.
-        - The Linux extended boot partition (storing kernels and initrds, 4GiB)
-          should have the flag 'bls_boot' in gparted
-          - This corresponds to type 142 in fdisk.
+        - The disk you want to use has a GPT partition table
 
-        NOTE: Users planning to re-install Serpent OS later on, may want to reserve
-              space for a separate /home partition (not handled by this installer).
+        - The EFI system partition (ESP):
+          - Is >=256MiB in size
+          - Has the 'esp' and 'boot' flags set in gparted (corresponds to type 1 in fdisk)
+          - Has been formatted as FAT32
 
-        If changes need to be made to partitions, please do so now before continuing.
+        - The Linux extended boot partition (XBOOTLDR):
+          - Is ~4GiB in size, as it is used to store multiple kernels and initramfs images
+          - Has the flag 'bls_boot' set in gparted (corresponds to type 142 in fdisk)
+          - Has been formatted as FAT32
+
+        - You have created a partition for your system root (/)
+          - The installer will format this for you based on your selections
+
+        - (Optional) You can add a partition to be used for your /home directories
+          - This is currently not handled by the installer at all, so you need to prepare
+            and format the partition manually if you want a separate /home partition
     "};
     cliclack::log::warning(format!(
-        "{} This is an alpha quality Serpent OS installer.\n\n{}",
+        "{} This is an alpha quality AerynOS installer.\n\n{}",
         style("Warning:").bold(),
         partition_detection_warning
     ))?;
 
-    let should_continue = cliclack::confirm("Are you ready to have lichen detect your partitions?").interact()?;
+    let should_continue =
+        cliclack::confirm("Have you set up partitions according to the above requirements?").interact()?;
     ensure!(should_continue, "User chose to abort before detecting partitions.");
 
-    cliclack::intro(style("Install Serpent OS").bold())?;
+    cliclack::intro(style("Install AerynOS").bold())?;
 
     // Test selection management, force GNOME
     let selections = selections::Manager::new().with_groups([
@@ -260,8 +266,14 @@ fn main() -> color_eyre::Result<()> {
     let parts = inst.system_partitions();
     let locales = inst.locales_for_ids(systemd::localectl_list_locales()?)?;
 
-    ensure!(!boots.is_empty(), "Failed to find an EFI system partition");
-    ensure!(!parts.is_empty(), "Failed to find a suitable root partition");
+    ensure!(
+        !boots.is_empty(),
+        "Failed to find FAT32-formatted available ESP + XBOOTLDR partitions"
+    );
+    ensure!(
+        !parts.is_empty(),
+        "Failed to find an available partition for the system root (/)"
+    );
 
     sp.clear();
 
@@ -279,7 +291,7 @@ fn main() -> color_eyre::Result<()> {
     let timezone = ask_timezone()?;
     let keyboard_layout_warning = indoc! {"
         Note that the keyboard layout for the current virtual terminal is controlled
-        via the GNOME Settings application.
+        via the Settings application.
 
         If a new keyboard layout is added there, please be aware that it may be
         necessary to exit the installer, open a new virtual terminal, and restart the
