@@ -35,7 +35,6 @@
     "dbus-broker",
     "dmidecode",
     "iproute2",
-    "hyperv-daemons",
     "pciutils",
     "qemu-guest-agent",
     "usbutils",
@@ -43,7 +42,6 @@
     "spice-vdagent",
     "systemd",
     "tzdata",
-    "util-linux",
-    "zram-generator-defaults"
+    "util-linux"
   ]
 }
