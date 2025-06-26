@@ -396,7 +396,7 @@ fn main() -> color_eyre::Result<()> {
     );
     let installer_success = format!(
         "🎉 🥳 Succesfully installed {}! Reboot now to start using it!",
-        style("Serpent OS").bold()
+        style("AerynOS").bold()
     );
     multi.clear()?;
     println!("\n{home_note}\n{installer_success}\n");
