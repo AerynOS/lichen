@@ -3,7 +3,7 @@
   "summary": "COSMIC Desktop",
   "description": "Warning: Provided as an alpha preview",
   "depends": [
-    "base"
+    "base-desktop"
   ],
   "required": [
     "cosmic-applets",
@@ -35,6 +35,8 @@
     "font-noto",
     "font-noto-emoji",
     "liberation-fonts-ttf",
+    "pkgset-aeryn-cosmic-minimal",
+    "pkgset-aeryn-cosmic-recommended",
     "serpent-artwork",
     "sysbinary(plymouthd)",
     "xdg-desktop-portal-cosmic",

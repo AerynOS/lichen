@@ -1,0 +1,12 @@
+{
+  "name": "base-desktop",
+  "summary": "Common desktop components",
+  "description": "Common desktop components",
+  "depends": [
+    "base"
+  ],
+  "required": [
+    "pkgset-aeryn-base-desktop",
+    "zram-generator-defaults"
+  ]
+}

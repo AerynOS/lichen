@@ -3,7 +3,7 @@
   "summary": "GNOME Desktop",
   "description": "Recommended for most users",
   "depends": [
-    "base"
+    "base-desktop"
   ],
   "required": [
     "binary(celluloid)",
@@ -32,6 +32,8 @@
     "gnome-backgrounds",
     "liberation-fonts-ttf",
     "loupe",
+    "pkgset-aeryn-gnome-minimal",
+    "pkgset-aeryn-gnome-recommended",
     "serpent-gnome-defaults",
     "sysbinary(gdm)",
     "sysbinary(plymouthd)"

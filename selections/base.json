@@ -37,13 +37,15 @@
     "iproute2",
     "hyperv-daemons",
     "pciutils",
+    "pkgset-aeryn-base",
+    "pkgset-aeryn-utilities",
+    "pkgset-aeryn-virtual",
     "qemu-guest-agent",
     "usbutils",
     "shadow",
     "spice-vdagent",
     "systemd",
     "tzdata",
-    "util-linux",
-    "zram-generator-defaults"
+    "util-linux"
   ]
 }
