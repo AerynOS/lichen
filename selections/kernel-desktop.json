@@ -8,9 +8,19 @@
   "required": [
     "linux-desktop",
     "linux-firmware",
-    "linux-firmware-amd",
-    "linux-firmware-intel",
+    "linux-firmware-amd-graphics",
+    "linux-firmware-atheros",
+    "linux-firmware-brcm80211",
+    "linux-firmware-cirrus",
+    "linux-firmware-intel-graphics",
+    "linux-firmware-intel-misc",
+    "linux-firmware-intel-sound",
     "linux-firmware-iwlwifi",
-    "linux-firmware-nvidia"
+    "linux-firmware-libertas",
+    "linux-firmware-mediatek",
+    "linux-firmware-misc",
+    "linux-firmware-nvidia-graphics",
+    "linux-firmware-realtek",
+    "linux-firmware-ti-connectivity"
   ]
 }

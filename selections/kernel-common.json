@@ -3,8 +3,9 @@
   "summary": "Common kernel runtime",
   "description": "Common kernel runtime",
   "required": [
+    "intel-microcode",
     "kmod",
-    "linux-firmware",
+    "linux-firmware-amd64-microcode",
     "lvm2"
   ]
 }
