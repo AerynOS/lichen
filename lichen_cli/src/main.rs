@@ -245,6 +245,7 @@ fn main() -> color_eyre::Result<()> {
     // Test selection management, force GNOME
     let selections = selections::Manager::new().with_groups([
         Group::from_str(include_str!("../../selections/base.json"))?,
+        Group::from_str(include_str!("../../selections/base-desktop.json"))?,
         Group::from_str(include_str!("../../selections/cosmic.json"))?,
         Group::from_str(include_str!("../../selections/develop.json"))?,
         Group::from_str(include_str!("../../selections/gnome.json"))?,
