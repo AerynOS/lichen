@@ -24,4 +24,4 @@ Required common pieces for kernels
 
 ### kernel-desktop
 
-Deskop specific kernel, firmware, etc.
+Desktop specific kernel, firmware, etc.
