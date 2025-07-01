@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
-//! Concrete implementation of the isntaller
+//! Concrete implementation of the installer
 
 use std::path::Path;
 

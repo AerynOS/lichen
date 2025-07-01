@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
-//! Partititon formatting
+//! Partition formatting
 
 use std::{path::PathBuf, process::Command};
 
