@@ -2,13 +2,13 @@
   "name": "gnome",
   "summary": "GNOME Desktop",
   "description": "Recommended for most users",
+  "priority": 10,
   "depends": [
     "base-desktop"
   ],
   "required": [
     "binary(celluloid)",
     "binary(file-roller)",
-    "binary(firefox)",
     "binary(gnome-calculator)",
     "binary(gnome-calendar)",
     "binary(gnome-clocks)",
@@ -25,17 +25,11 @@
     "binary(resources)",
     "binary(snapshot)",
     "binary(starship)",
-    "flatpak",
-    "font-hack",
-    "font-noto",
-    "font-noto-emoji",
     "gnome-backgrounds",
-    "liberation-fonts-ttf",
     "loupe",
     "pkgset-aeryn-gnome-minimal",
     "pkgset-aeryn-gnome-recommended",
     "serpent-gnome-defaults",
-    "sysbinary(gdm)",
-    "sysbinary(plymouthd)"
+    "sysbinary(gdm)"
   ]
 }

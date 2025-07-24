@@ -6,6 +6,13 @@
     "base"
   ],
   "required": [
+    "binary(firefox)",
+    "flatpak",
+    "font-hack",
+    "font-noto",
+    "font-noto-emoji",
+    "liberation-fonts-ttf",
+    "sysbinary(plymouthd)",
     "pkgset-aeryn-base-desktop",
     "zram-generator-defaults"
   ]

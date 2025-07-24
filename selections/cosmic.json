@@ -2,6 +2,7 @@
   "name": "cosmic",
   "summary": "COSMIC Desktop",
   "description": "Warning: Provided as an alpha preview",
+  "priority": 30,
   "depends": [
     "base-desktop"
   ],
@@ -28,17 +29,10 @@
     "cosmic-term",
     "cosmic-wallpapers",
     "cosmic-workspaces",
-    "firefox",
-    "flatpak",
     "font-opensans",
-    "font-hack",
-    "font-noto",
-    "font-noto-emoji",
-    "liberation-fonts-ttf",
     "pkgset-aeryn-cosmic-minimal",
     "pkgset-aeryn-cosmic-recommended",
     "serpent-artwork",
-    "sysbinary(plymouthd)",
     "xdg-desktop-portal-cosmic",
     "xdg-desktop-portal-gtk"
   ]

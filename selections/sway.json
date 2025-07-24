@@ -1,0 +1,14 @@
+{
+  "name": "sway",
+  "summary": "sway - tiling compositor",
+  "description": "A tiling Wayland compositor",
+  "priority": 70,
+  "depends": [
+    "base-desktop"
+  ],
+  "required": [
+    "binary(sddm)",
+    "pkgset-aeryn-sway-recommended",
+    "branding-aeryn-sway"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "plasma-shared",
+  "summary": "Plasma Desktop - Shared components",
+  "description": "Recommended for most users",
+  "depends": [
+    "base-desktop"
+  ],
+  "required": [
+    "pkgset-aeryn-plasma-recommended",
+    "branding-aeryn-plasma"
+  ]
+}
