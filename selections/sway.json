@@ -2,6 +2,7 @@
   "name": "sway",
   "summary": "sway - tiling compositor",
   "description": "A tiling Wayland compositor",
+  "display": true,
   "priority": 70,
   "depends": [
     "base-desktop"

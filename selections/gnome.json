@@ -2,6 +2,7 @@
   "name": "gnome",
   "summary": "GNOME Desktop",
   "description": "Recommended for most users",
+  "display": true,
   "priority": 10,
   "depends": [
     "base-desktop"

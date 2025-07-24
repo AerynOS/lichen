@@ -2,6 +2,7 @@
   "name": "cosmic",
   "summary": "COSMIC Desktop",
   "description": "Warning: Provided as an alpha preview",
+  "display": true,
   "priority": 30,
   "depends": [
     "base-desktop"

@@ -35,6 +35,10 @@ pub struct Group {
     /// User visible description for this selection group
     pub description: String,
 
+    /// Whether or not to display the "group" as an installable option
+    #[serde(default)]
+    pub display: bool,
+
     /// Priority for sorting desktops (lower priorities are sorted before higher ones)
     #[serde(default)]
     pub priority: u8,

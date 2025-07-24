@@ -2,6 +2,7 @@
   "name": "plasma-plm",
   "summary": "Plasma Desktop - plasma-login-manager (EXPERIMENTAL)",
   "description": "EXPERIMENTAL",
+  "display": true,
   "priority": 90,
   "depends": [
     "plasma-shared"

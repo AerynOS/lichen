@@ -2,6 +2,7 @@
   "name": "plasma-sddm",
   "summary": "Plasma Desktop - SDDM Login Manager",
   "description": "Recommended for most users",
+  "display": true,
   "priority": 15,
   "depends": [
     "base-desktop"

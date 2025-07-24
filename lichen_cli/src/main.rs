@@ -251,26 +251,13 @@ fn main() -> color_eyre::Result<()> {
         Group::from_str(include_str!("../../selections/gnome.json"))?,
         Group::from_str(include_str!("../../selections/kernel-common.json"))?,
         Group::from_str(include_str!("../../selections/kernel-desktop.json"))?,
-        Group::from_str(include_str!("../../selections/labwc.json"))?,
-        Group::from_str(include_str!("../../selections/niri.json"))?,
         Group::from_str(include_str!("../../selections/plasma-shared.json"))?,
         Group::from_str(include_str!("../../selections/plasma-sddm.json"))?,
         Group::from_str(include_str!("../../selections/plasma-plm.json"))?,
         Group::from_str(include_str!("../../selections/sway.json"))?,
     ]);
 
-    let desktops = selections
-        .groups()
-        .filter(|g| {
-            g.name == "cosmic"
-                || g.name == "gnome"
-                || g.name == "plasma-sddm"
-                || g.name == "plasma-plm"
-                || g.name == "labwc"
-                || g.name == "niri"
-                || g.name == "sway"
-        })
-        .collect::<Vec<_>>();
+    let desktops = selections.groups().filter(|g| g.display).collect::<Vec<_>>();
 
     let sp = cliclack::spinner();
     sp.start("Loading");
