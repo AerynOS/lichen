@@ -206,6 +206,18 @@ fn main() -> color_eyre::Result<()> {
     let euid = unsafe { geteuid() };
     ensure!(euid == 0, "lichen must be run as root. Re-run with sudo.");
 
+    let internet_warning = indoc! {"
+        An active internet connection is required to install AerynOS.
+
+        The installer will attempt to download all the latest required packages from the AerynOS repository. 
+        Please ensure your system is connected to the internet before proceeding, otherwise installation will fail.
+    "};
+    cliclack::log::warning(format!(
+        "{}\n{}\n",
+        style("Internet Requirement:").bold(),
+        internet_warning
+    ))?;
+
     let partition_detection_warning = indoc! {"
         This iteration of the installer REQUIRES you to have pre-created GPT partitions.
 
