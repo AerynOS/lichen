@@ -6,6 +6,7 @@
     "base-desktop"
   ],
   "required": [
+    "pkgset-aeryn-plasma-minimal",
     "pkgset-aeryn-plasma-recommended",
     "branding-aeryn-plasma"
   ]

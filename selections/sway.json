@@ -8,8 +8,9 @@
     "base-desktop"
   ],
   "required": [
+    "binary(alacritty)",
     "binary(sddm)",
-    "pkgset-aeryn-sway-recommended",
+    "pkgset-aeryn-sway-minimal",
     "branding-aeryn-sway"
   ]
 }
