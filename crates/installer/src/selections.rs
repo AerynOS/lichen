@@ -10,6 +10,7 @@ use std::{
     str::FromStr,
 };
 
+use itertools::Itertools;
 use serde::Deserialize;
 use thiserror::Error;
 
@@ -33,6 +34,14 @@ pub struct Group {
 
     /// User visible description for this selection group
     pub description: String,
+
+    /// Whether or not to display the "group" as an installable option
+    #[serde(default)]
+    pub display: bool,
+
+    /// Priority for sorting desktops (lower priorities are sorted before higher ones)
+    #[serde(default)]
+    pub priority: u8,
 
     /// Optionally a set of selection groups forming the basis of this one
     #[serde(default)]
@@ -87,7 +96,7 @@ impl Manager {
 
     /// Return an iterator of references to the groups
     pub fn groups(&self) -> impl Iterator<Item = &'_ Group> {
-        self.groups.values()
+        self.groups.values().sorted_by_key(|x| x.priority)
     }
 
     /// privatwly recurse for string deps
