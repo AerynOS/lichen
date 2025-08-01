@@ -5,7 +5,7 @@
   "display": true,
   "priority": 15,
   "depends": [
-    "base-desktop"
+    "plasma-shared"
   ],
   "required": [
     "binary(sddm)",
