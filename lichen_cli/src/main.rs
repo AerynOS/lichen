@@ -255,6 +255,7 @@ fn main() -> color_eyre::Result<()> {
         Group::from_str(include_str!("../../selections/plasma-sddm.json"))?,
         Group::from_str(include_str!("../../selections/plasma-plm.json"))?,
         Group::from_str(include_str!("../../selections/sway.json"))?,
+        Group::from_str(include_str!("../../selections/server.json"))?,
     ]);
 
     let desktops = selections.groups().filter(|g| g.display).collect::<Vec<_>>();
