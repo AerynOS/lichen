@@ -236,7 +236,7 @@ fn main() -> color_eyre::Result<()> {
         partition_detection_warning
     ))?;
 
-    cliclack::log::warning("Make sure you have an active internet connection to downloads packages.")?;
+    cliclack::log::warning("Make sure you have an active internet connection to download packages.")?;
 
     let should_continue =
         cliclack::confirm("Have you set up partitions according to the above requirements?").interact()?;
