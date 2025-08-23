@@ -236,6 +236,8 @@ fn main() -> color_eyre::Result<()> {
         partition_detection_warning
     ))?;
 
+    cliclack::log::warning("Make sure you have an active internet connection to downloads packages.")?;
+
     let should_continue =
         cliclack::confirm("Have you set up partitions according to the above requirements?").interact()?;
     ensure!(should_continue, "User chose to abort before detecting partitions.");
