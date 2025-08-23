@@ -244,6 +244,7 @@ fn main() -> color_eyre::Result<()> {
 
     cliclack::intro(style("Install AerynOS").bold())?;
 
+
     // Test selection management
     let selections = selections::Manager::new().with_groups(selections!());
 

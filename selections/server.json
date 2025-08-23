@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "summary": "Console-only - no WM/DE installed (EXPERTS ONLY)",
+  "description": "EXPERTS ONLY",
+  "display": true,
+  "priority": 100,
+  "depends": [
+    "base"
+  ],
+  "required": [
+    "networkmanager",
+    "binary(nmtui)",
+    "sysbinary(sshd)"
+  ]
+}
