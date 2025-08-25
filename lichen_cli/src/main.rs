@@ -24,6 +24,8 @@ use installer::{
 };
 use nix::libc::geteuid;
 
+include!(concat!(env!("OUT_DIR"), "/selections.rs"));
+
 #[derive(Debug)]
 struct CliContext {
     root: PathBuf,
@@ -244,21 +246,8 @@ fn main() -> color_eyre::Result<()> {
 
     cliclack::intro(style("Install AerynOS").bold())?;
 
-    // Test selection management, force GNOME
-    let selections = selections::Manager::new().with_groups([
-        Group::from_str(include_str!("../../selections/base.json"))?,
-        Group::from_str(include_str!("../../selections/base-desktop.json"))?,
-        Group::from_str(include_str!("../../selections/cosmic.json"))?,
-        Group::from_str(include_str!("../../selections/develop.json"))?,
-        Group::from_str(include_str!("../../selections/gnome.json"))?,
-        Group::from_str(include_str!("../../selections/kernel-common.json"))?,
-        Group::from_str(include_str!("../../selections/kernel-desktop.json"))?,
-        Group::from_str(include_str!("../../selections/plasma-shared.json"))?,
-        Group::from_str(include_str!("../../selections/plasma-sddm.json"))?,
-        Group::from_str(include_str!("../../selections/plasma-plm.json"))?,
-        Group::from_str(include_str!("../../selections/sway.json"))?,
-        Group::from_str(include_str!("../../selections/server.json"))?,
-    ]);
+    // Test selection management
+    let selections = selections::Manager::new().with_groups(selections!());
 
     let desktops = selections.groups().filter(|g| g.display).collect::<Vec<_>>();
 
