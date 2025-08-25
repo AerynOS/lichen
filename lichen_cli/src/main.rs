@@ -301,6 +301,7 @@ fn main() -> color_eyre::Result<()> {
     let summary = |title: &str, value: &str| format!("{}: {}", style(title).bold(), value);
 
     let note = [
+        summary("Install", &selected_desktop.summary.to_string()),
         summary("Locale", &selected_locale.to_string()),
         summary("Timezone", &timezone),
         summary("Bootloader", &esp.to_string()),
