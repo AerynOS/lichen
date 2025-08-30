@@ -21,6 +21,7 @@
     "linux-firmware-misc",
     "linux-firmware-nvidia-graphics",
     "linux-firmware-realtek",
-    "linux-firmware-ti-connectivity"
+    "linux-firmware-ti-connectivity",
+    "sof-firmware"
   ]
 }
