@@ -1,8 +1,8 @@
 {
   "name": "sway",
-  "summary": "sway - tiling compositor",
-  "description": "A tiling Wayland compositor",
-  "display": true,
+  "summary": "Sway - A tiling Wayland compositor inspired by i3",
+  "description": "Flexible DIY Desktop Experience",
+  "display": false,
   "priority": 70,
   "depends": [
     "base-desktop"

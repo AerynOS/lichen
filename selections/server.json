@@ -1,7 +1,7 @@
 {
   "name": "server",
   "summary": "Console-only - no WM/DE installed (EXPERTS ONLY)",
-  "description": "EXPERTS ONLY",
+  "description": "Are you sure? Like, REALLY sure?",
   "display": true,
   "priority": 100,
   "depends": [
