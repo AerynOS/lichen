@@ -226,7 +226,7 @@ fn main() -> color_eyre::Result<()> {
           - Has been formatted as FAT32
 
         - You have created a partition for your system root (/)
-          - Has been formatted as XFS (recommended), or another filesystem
+          - It has been formatted as XFS (recommended), or another filesystem
             recognised by the installer (e.g. ext4 or f2fs). This choice can
             be changed later in the installation process.
 
