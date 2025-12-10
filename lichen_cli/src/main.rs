@@ -226,7 +226,9 @@ fn main() -> color_eyre::Result<()> {
           - Has been formatted as FAT32
 
         - You have created a partition for your system root (/)
-          - The installer will format this for you based on your selections
+          - Has been formatted as XFS (recommended; fast w/ moss hardlink rollbacks),
+            f2fs (not recommended; surprisingly slow w/ moss hardlink rollbacks), or
+            ext4 (not recommended; slow, limited moss hardlink rollback capacity)
 
         - (Optional) You can add a partition to be used for your /home directories
           - This is currently not handled by the installer at all, so you need to prepare
