@@ -1,12 +1,10 @@
 {
   "name": "cosmic",
   "summary": "COSMIC Desktop",
-  "description": "Warning: Provided as an alpha preview",
+  "description": "Stable: But still under active development",
   "display": true,
   "priority": 30,
-  "depends": [
-    "base-desktop"
-  ],
+  "depends": ["base-desktop"],
   "required": [
     "cosmic-applets",
     "cosmic-bg",
