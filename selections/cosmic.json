@@ -1,7 +1,7 @@
 {
   "name": "cosmic",
   "summary": "COSMIC Desktop",
-  "description": "Stable: But still under active development",
+  "description": "Stable, but still under active development",
   "display": true,
   "priority": 30,
   "depends": ["base-desktop"],
