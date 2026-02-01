@@ -9,6 +9,7 @@
   ],
   "required": [
     "networkmanager",
+    "networkmanager-wifi"
     "binary(nmtui)",
     "sysbinary(sshd)"
   ]
