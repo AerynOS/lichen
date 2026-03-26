@@ -90,7 +90,7 @@ impl Disk {
             Kind::HDD
         };
 
-        // additioal metadata.
+        // additional metadata.
 
         let vendor = fs::read_to_string(device_link.join("vendor"))
             .ok()
