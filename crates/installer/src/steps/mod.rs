@@ -35,7 +35,7 @@ pub enum Step<'a> {
     Mount(Box<MountPartition<'a>>),
     SetPassword(Box<SetPassword<'a>>),
     SetLocale(Box<SetLocale<'a>>),
-    SetMachineID(Box<SetMachineID>),
+    ResetMachineID(Box<ResetMachineID>),
     SetTimezone(Box<SetTimezone<'a>>),
     WriteFstab(Box<EmitFstab>),
 }
@@ -86,7 +86,7 @@ impl<'a> Step<'a> {
 
     /// Construct a dbus/systemd machine id
     pub fn set_machine_id() -> Self {
-        Self::SetMachineID(Box::new(SetMachineID {}))
+        Self::ResetMachineID(Box::new(ResetMachineID {}))
     }
 
     // Emit the given fstab
@@ -106,7 +106,7 @@ impl<'a> Step<'a> {
             Step::SetPassword(_) => "set-password",
             Step::SetLocale(_) => "set-locale",
             Step::SetTimezone(_) => "set-timezone",
-            Step::SetMachineID(_) => "set-machine-id",
+            Step::ResetMachineID(_) => "reset-machine-id",
             Step::WriteFstab(_) => "write-fstab",
         }
     }
@@ -123,7 +123,7 @@ impl<'a> Step<'a> {
             Step::SetPassword(s) => s.title(),
             Step::SetLocale(s) => s.title(),
             Step::SetTimezone(s) => s.title(),
-            Step::SetMachineID(s) => s.title(),
+            Step::ResetMachineID(s) => s.title(),
             Step::WriteFstab(s) => s.title(),
         }
     }
@@ -140,7 +140,7 @@ impl<'a> Step<'a> {
             Step::SetPassword(s) => s.describe(),
             Step::SetLocale(s) => s.describe(),
             Step::SetTimezone(s) => s.describe(),
-            Step::SetMachineID(s) => s.describe(),
+            Step::ResetMachineID(s) => s.describe(),
             Step::WriteFstab(s) => s.describe(),
         }
     }
@@ -157,7 +157,7 @@ impl<'a> Step<'a> {
             Step::SetPassword(s) => Ok(s.execute(context)?),
             Step::SetLocale(s) => Ok(s.execute(context)?),
             Step::SetTimezone(s) => Ok(s.execute(context)?),
-            Step::SetMachineID(s) => Ok(s.execute(context)?),
+            Step::ResetMachineID(s) => Ok(s.execute(context)?),
             Step::WriteFstab(s) => Ok(s.execute(context)?),
         }
     }
@@ -180,4 +180,4 @@ mod cleanup;
 pub use cleanup::Cleanup;
 
 mod postinstall;
-pub use postinstall::{CreateAccount, EmitFstab, FstabEntry, SetLocale, SetMachineID, SetPassword, SetTimezone};
+pub use postinstall::{CreateAccount, EmitFstab, FstabEntry, ResetMachineID, SetLocale, SetPassword, SetTimezone};

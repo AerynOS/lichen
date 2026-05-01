@@ -125,17 +125,17 @@ impl<'a> SetTimezone<'a> {
     }
 }
 
-/// Set a machine ID up in the root
+/// Delete an existing machine-id so that systemd detects the first boot (and creates the file then)
 #[derive(Debug)]
-pub struct SetMachineID {}
+pub struct ResetMachineID {}
 
-impl<'a> SetMachineID {
+impl<'a> ResetMachineID {
     pub(super) fn title(&self) -> String {
-        "Allocate machine-id".to_string()
+        "Reset machine-id".to_string()
     }
 
     pub(super) fn describe(&self) -> String {
-        "via systemd-machine-id-setup".to_string()
+        "via first-boot".to_string()
     }
 
     pub(super) fn execute(&self, context: &'a impl Context<'a>) -> Result<(), Error> {
@@ -143,11 +143,6 @@ impl<'a> SetMachineID {
         if file.exists() {
             fs::remove_file(file)?;
         }
-
-        let mut cmd = Command::new("chroot");
-        cmd.arg(context.root().clone());
-        cmd.arg("systemd-machine-id-setup");
-        context.run_command_captured(&mut cmd, None)?;
 
         Ok(())
     }
