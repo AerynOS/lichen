@@ -6,7 +6,7 @@
     "kernel-common"
   ],
   "required": [
-    "linux-desktop",
+    "linux-stable",
     "linux-firmware",
     "linux-firmware-amd-graphics",
     "linux-firmware-atheros",

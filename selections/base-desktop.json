@@ -15,6 +15,7 @@
     "liberation-fonts-ttf",
     "scx-tools",
     "sysbinary(plymouthd)",
+    "system76-scheduler",
     "pkgset-aeryn-base-desktop",
     "zram-generator-defaults"
   ]
