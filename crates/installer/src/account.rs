@@ -38,7 +38,7 @@ impl Default for Account {
             username: "user".into(),
             gecos: None,
             homedir: "/home/user".into(),
-            shell: "/bin/bash".into(),
+            shell: "/usr/bin/bash".into(),
             password: None,
             builtin: false,
         }
