@@ -216,8 +216,9 @@ impl Installer {
 
         // HAX:
         s.push(Step::add_repo(AddRepo {
-            uri: "https://cdn.aerynos.dev/stream/unstable/x86_64/stone.index".into(),
-            name: "unstable".into(),
+            uri: "https://cdn.aerynos.dev".into(),
+            name: "stream/unstable".into(),
+            version: "stream/unstable".into(),
             priority: 0,
         }));
         s.push(Step::install_packages(InstallPackages {

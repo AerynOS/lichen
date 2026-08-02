@@ -1,5 +1,4 @@
-// SPDX-FileCopyrightText: Copyright © 2025 Serpent OS Developers
-//
+// SPDX-FileCopyrightText: Copyright © 2025 AerynOS Developers
 // SPDX-License-Identifier: MPL-2.0
 
 //! Package management encapsulation (moss only)
@@ -10,8 +9,9 @@ use super::Context;
 /// Add a repository to the target disk
 #[derive(Debug)]
 pub struct AddRepo {
-    pub(crate) uri: String,
     pub(crate) name: String,
+    pub(crate) uri: String,
+    pub(crate) version: String,
     pub(crate) priority: u64,
 }
 
@@ -23,7 +23,10 @@ impl<'a> AddRepo {
 
     /// Render the action
     pub(super) fn describe(&self) -> String {
-        format!("{} (priority {})", self.uri, self.priority)
+        format!(
+            "{} (channel=main, version={}) [priority {}]",
+            self.uri, self.version, self.priority
+        )
     }
 
     /// Run moss against the target, adding a repo
@@ -31,7 +34,15 @@ impl<'a> AddRepo {
         let mut cmd = Command::new("moss");
         cmd.arg("-D");
         cmd.arg(context.root());
-        cmd.args(["repo", "add", &self.name, &self.uri, "-p"]);
+        cmd.args([
+            "repo",
+            "add",
+            &self.name,
+            &self.uri,
+            "--root-index",
+            &self.version,
+            "-p",
+        ]);
         cmd.arg(self.priority.to_string());
         cmd.arg("-y");
 
