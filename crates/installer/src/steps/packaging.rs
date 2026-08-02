@@ -24,7 +24,7 @@ impl<'a> AddRepo {
     /// Render the action
     pub(super) fn describe(&self) -> String {
         format!(
-            "{} (channel=main, version={}) [priority {}]",
+            "{} (channel=main, {}) [priority {}]",
             self.uri, self.version, self.priority
         )
     }
