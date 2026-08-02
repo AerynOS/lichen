@@ -217,8 +217,8 @@ impl Installer {
         // HAX:
         s.push(Step::add_repo(AddRepo {
             uri: "https://cdn.aerynos.dev".into(),
-            name: "stream/unstable".into(),
-            version: "stream/unstable".into(),
+            name: "unstable-stream".into(),
+            version: "version=stream/unstable".into(),
             priority: 0,
         }));
         s.push(Step::install_packages(InstallPackages {
