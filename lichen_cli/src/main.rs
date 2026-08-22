@@ -26,6 +26,8 @@ use nix::libc::geteuid;
 
 include!(concat!(env!("OUT_DIR"), "/selections.rs"));
 
+const SEE_ALL_TIMEZONES: &str = "See all timezones";
+
 #[derive(Debug)]
 struct CliContext {
     root: PathBuf,
@@ -80,11 +82,11 @@ fn ask_locale<'a>(locales: &'a [Locale<'a>]) -> color_eyre::Result<&'a Locale<'a
     Ok(&locales[index])
 }
 
-fn ask_timezone() -> color_eyre::Result<String> {
-    let variants = chrono_tz::TZ_VARIANTS
+fn pick_timezone(available_timezones: &[&str]) -> color_eyre::Result<String> {
+    let variants = available_timezones
         .iter()
         .enumerate()
-        .map(|(i, v)| (i, v, ""))
+        .map(|(i, v)| (i, *v, ""))
         .collect::<Vec<_>>();
     ensure!(!variants.is_empty(), "Internal error: No timezones");
     let index = cliclack::select("Pick a timezone")
@@ -94,7 +96,24 @@ fn ask_timezone() -> color_eyre::Result<String> {
         .set_size(10)
         .interact()?;
 
-    Ok(chrono_tz::TZ_VARIANTS[index].to_string())
+    Ok(available_timezones[index].to_string())
+}
+
+/// Try limiting timezones by selected locale, otherwise select from all timezones
+fn ask_timezone(inst: &Installer, selected_locale: &Locale<'_>) -> color_eyre::Result<String> {
+    let mut available_timezones = inst
+        .zoneinfo()
+        .timezones_for_territory(&selected_locale.territory.code2);
+    // TODO: Should UTC timezone be added in crates/system/zoneinfo?
+    available_timezones.push("UTC");
+    available_timezones.insert(0, SEE_ALL_TIMEZONES);
+    let timezone = pick_timezone(&available_timezones)?;
+    if timezone == SEE_ALL_TIMEZONES {
+        let all_timezones: Vec<&str> = inst.zoneinfo().all_timezones().iter().map(String::as_str).collect();
+        pick_timezone(&all_timezones)
+    } else {
+        Ok(timezone)
+    }
 }
 
 /// Pick an ESP please...
@@ -284,7 +303,7 @@ fn main() -> color_eyre::Result<()> {
 
     let selected_desktop = ask_desktop(&desktops)?;
     let selected_locale = ask_locale(&locales)?;
-    let timezone = ask_timezone()?;
+    let timezone = ask_timezone(&inst, selected_locale)?;
     let keyboard_layout_warning = indoc! {"
         Note that the keyboard layout for the current virtual terminal is controlled
         via the Settings application.

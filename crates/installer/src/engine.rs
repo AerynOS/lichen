@@ -9,6 +9,7 @@ use std::path::Path;
 use system::{
     disk::{self, Disk},
     locale::{self, Locale},
+    zoneinfo,
 };
 use thiserror::Error;
 use topology::disk::Builder;
@@ -29,6 +30,9 @@ pub enum Error {
     #[error("locale: {0}")]
     Locale(#[from] locale::Error),
 
+    #[error("zoneinfo: {0}")]
+    Zoneinfo(#[from] zoneinfo::Error),
+
     #[error("missing mandatory partition: {0}")]
     MissingPartition(&'static str),
 
@@ -48,6 +52,9 @@ pub struct Installer {
     /// Complete locale registry
     locale_registry: locale::Registry,
 
+    /// Complete timezone registry
+    zoneinfo_registry: zoneinfo::Registry,
+
     /// Boot partitions
     boot_parts: Vec<BootPartition>,
 
@@ -59,6 +66,7 @@ impl Installer {
     /// Return a newly initialised installer
     pub fn new() -> Result<Self, Error> {
         let locale_registry = locale::Registry::new()?;
+        let zoneinfo_registry = zoneinfo::Registry::new()?;
         let disks = Disk::discover()?;
 
         // Figure out where we live right now and exclude the rootfs
@@ -124,6 +132,7 @@ impl Installer {
 
         Ok(Self {
             locale_registry,
+            zoneinfo_registry,
             system_parts,
             boot_parts,
         })
@@ -132,6 +141,11 @@ impl Installer {
     /// Allow access to locale registry (mapping IDs)
     pub fn locales(&self) -> &locale::Registry {
         &self.locale_registry
+    }
+    ///
+    /// Allow access to zoneinfo registry
+    pub fn zoneinfo(&self) -> &zoneinfo::Registry {
+        &self.zoneinfo_registry
     }
 
     /// Generate/load the locale map

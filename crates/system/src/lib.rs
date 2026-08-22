@@ -6,3 +6,4 @@
 
 pub mod disk;
 pub mod locale;
+pub mod zoneinfo;
